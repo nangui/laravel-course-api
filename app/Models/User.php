@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,4 +44,14 @@ class User extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ownedCourses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    public function coursesTaken()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 }
